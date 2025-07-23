@@ -1,3 +1,8 @@
+<script setup>
+import NavBar from './components/NavBar.vue'
+</script>
+
 <template>
-  <h1>Blog App</h1>
+  <NavBar />
+  <router-view />
 </template>
