@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <h3>Blog App</h3>
+    <h3>
+      <router-link to="/" exact-active-class="active-link" class="nav-link">Blog App</router-link>
+    </h3>
     <div class="link-container">
       <ul>
         <li>
@@ -25,19 +27,22 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 3rem;
+  align-items: center;
   width: 100%;
-  box-shadow: 0 4px 6px rgb(200, 237, 245);
   height: 6rem;
+  padding: 3rem;
+  background: rgb(8, 150, 182);
 }
 nav h3 {
-  color: rgb(8, 150, 182);
+  color: white;
+  padding: 0 3rem;
 }
 nav div.link-container ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   gap: 20px;
+  padding: 3rem;
 }
 nav div.link-container ul li {
   list-style-type: none;
@@ -47,9 +52,9 @@ nav div.link-container ul li {
 }
 .nav-link {
   text-decoration: none;
-  color: gray;
+  color: white;
 }
 .active-link {
-color: rgb(8, 150, 182);
+  color: orange;
 }
 </style>

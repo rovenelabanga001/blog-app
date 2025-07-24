@@ -1,0 +1,99 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Vue 3",
+      "body": "Vue 3 is a major evolution of the Vue.js framework. It introduces the Composition API, which provides a more flexible and powerful way to organize component logic. The Composition API allows developers to encapsulate logic into reusable functions, called composables, making large-scale applications easier to manage. In addition, Vue 3 boasts improved performance due to a rewritten virtual DOM and better tree-shaking capabilities. With native support for TypeScript and a smaller runtime footprint, Vue 3 is optimized for both performance and maintainability. This guide will walk you through creating your first app, setting up components, and using reactive data effectively.",
+      "author": "Rovenel",
+      "publishedAt": "2025-06-10T09:00:00Z",
+      "comments": [
+        { "id": 1, "author": "Jane", "text": "Very helpful post, thanks!" },
+        { "id": 2, "author": "Ken", "text": "Vue 3 looks amazing!" },
+        { "id": 3, "author": "Mary", "text": "I finally understand Composition API now." }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Understanding Reactivity in Vue",
+      "body": "Reactivity lies at the heart of Vue. In Vue 3, it's implemented using JavaScript Proxies, which allow Vue to intercept and track changes to data properties. This enables efficient updates to the DOM when reactive data changes. The `ref()` and `reactive()` functions are core to creating reactive references and objects. Developers can also use `computed()` for derived state and `watch()` for side effects. Understanding these tools is essential for building dynamic UIs. The best way to grasp Vue reactivity is by building small examples and observing how Vue tracks and updates data in real time.",
+      "author": "Jane Doe",
+      "publishedAt": "2025-06-15T14:30:00Z",
+      "comments": [
+        { "id": 1, "author": "Emma", "text": "The proxy explanation was super clear." },
+        { "id": 2, "author": "Ali", "text": "Now I finally understand reactivity!" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Routing in Vue with Vue Router",
+      "body": "Vue Router is the official router for Vue.js and enables developers to create Single Page Applications with dynamic routing. With Vue Router, you can map routes to components, create nested routes, use navigation guards, and pass parameters or query strings between pages. Lazy-loading components via route-level code splitting helps improve performance. Vue Router also supports named views and programmatic navigation using `router.push`, `router.replace`, and `router.back`. This article walks through setting up a basic router, defining routes in a separate file, linking between pages with `<router-link>`, and handling navigation dynamically.",
+      "author": "John Smith",
+      "publishedAt": "2025-06-18T11:45:00Z",
+      "comments": [
+        { "id": 1, "author": "Carlos", "text": "Exactly what I needed for my project." },
+        { "id": 2, "author": "Susan", "text": "The examples were very clear." }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Handling Forms in Vue",
+      "body": "Handling user input is critical in any application. Vue provides the `v-model` directive for two-way binding of form inputs. You can use `v-model` on input fields, textareas, checkboxes, radio buttons, and even select dropdowns. Under the hood, `v-model` is syntactic sugar for setting a value and listening to input events. For custom components, you can create a custom `v-model` binding using `modelValue` and `@update:modelValue`. This article also covers form validation using native constraints and third-party libraries like Vuelidate or vee-validate, as well as managing form submission via the `@submit.prevent` directive.",
+      "author": "Rovenel",
+      "publishedAt": "2025-06-21T08:20:00Z",
+      "comments": []
+    },
+    {
+      "id": 5,
+      "title": "Vue Lifecycle Hooks Explained",
+      "body": "Vue components go through a predictable lifecycle—from creation to destruction. Understanding these hooks is key to managing side effects like fetching data or setting intervals. Lifecycle hooks such as `onMounted`, `onUpdated`, and `onUnmounted` replace the old `mounted`, `updated`, and `destroyed` options in the Composition API. Other hooks like `onBeforeMount`, `onBeforeUpdate`, and `onBeforeUnmount` are useful for debugging and setup. This post provides real-world use cases and explains how to clean up side effects properly using `onUnmounted` to prevent memory leaks in your application.",
+      "author": "Ali Khan",
+      "publishedAt": "2025-06-25T12:00:00Z",
+      "comments": [
+        { "id": 1, "author": "Jane", "text": "Great breakdown of lifecycle hooks." },
+        { "id": 2, "author": "Tom", "text": "Very useful for debugging issues." },
+        { "id": 3, "author": "Kim", "text": "I wish I read this earlier." },
+        { "id": 4, "author": "Ben", "text": "onUnmounted was new to me!" }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Deploying Vue Apps",
+      "body": "Once you've built your Vue app, deploying it to the web is the next step. Vue apps can be deployed to platforms like Netlify, Vercel, or GitHub Pages using simple build commands. This guide walks you through setting up continuous deployment with GitHub, creating production builds with `npm run build`, and configuring custom domains. It also discusses environmental variables, build optimizations, and resolving common deployment issues like 404s on refresh (solved using `history` mode with fallback rewrites).",
+      "author": "Mary Wambui",
+      "publishedAt": "2025-06-27T16:10:00Z",
+      "comments": [{ "id": 1, "author": "Victor", "text": "Deployment made easy, thanks!" }]
+    },
+    {
+      "id": 7,
+      "title": "Creating a Blog with Vue and JSON Server",
+      "body": "Rapid prototyping is essential for testing ideas. JSON Server is a fantastic tool that creates a full REST API from a simple JSON file, making it easy to mock data. When paired with Vue, it allows developers to simulate a real backend. This post guides you through setting up JSON Server, creating and reading posts via HTTP requests using Axios or Fetch, and handling routes, parameters, and dynamic segments in your frontend. This setup is ideal for creating MVPs or frontend-only apps with realistic data interactions.",
+      "author": "Rovenel",
+      "publishedAt": "2025-06-29T10:30:00Z",
+      "comments": [
+        { "id": 1, "author": "Eliza", "text": "Love the idea of rapid prototyping!" },
+        { "id": 2, "author": "Moses", "text": "Helped me test a project idea fast." },
+        { "id": 3, "author": "Janet", "text": "Very practical example." }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Styling Vue Components",
+      "body": "Vue offers a variety of ways to apply styles to components. With scoped CSS, styles are applied only to the component they're defined in, preventing global clashes. CSS Modules provide a similar isolation but with hashed class names. Vue also supports integrating with popular frameworks like Tailwind CSS, Bootstrap, or Bulma. This article explores best practices for managing component styles, including dynamic classes, conditional styles with `:class` and `:style`, and using preprocessors like Sass. A section is dedicated to handling dark mode and media queries within components.",
+      "author": "Emma Li",
+      "publishedAt": "2025-07-01T13:45:00Z",
+      "comments": [
+        { "id": 1, "author": "Samuel", "text": "Tailwind + Vue is a great combo." },
+        { "id": 2, "author": "Chris", "text": "Nice overview of styling options." },
+        { "id": 3, "author": "Angela", "text": "Scoped CSS makes my life easier." }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Best Practices for Component Communication",
+      "body": "In Vue, components can communicate using props, emits, provide/inject, and even global event buses. Choosing the right pattern depends on the relationship between components. For parent-child, `props` and `emits` are sufficient. For deeply nested components, `provide/inject` can simplify passing values. This guide compares different patterns with real-life examples. It also includes tips on avoiding prop drilling, properly validating props, and using composables to share logic. You’ll also see how to create custom hooks to centralize logic and improve maintainability.",
+      "author": "Daniel Njoroge",
+      "publishedAt": "2025-07-03T15:55:00Z",
+      "comments": []
+    }
+  ]
+}

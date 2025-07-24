@@ -2,8 +2,32 @@ body {
   padding: 0;
   margin: 0;
   width: 100%;
+  overflow-x: hidden;
+  height: 100%;
   box-sizing: border-box;
 }
 .body-section {
   padding: 3rem;
+  box-shadow: 6px 5px 6px 5px rgb(235, 233, 233);
+  width: 80%;
+}
+.body-section button {
+  background: orange;
+  color: white;
+  border: none;
+  height: 2rem;
+  width: fit-content;
+  cursor: pointer;
+  transition: 0.3s ease-in-out color;
+}
+.body-section button:hover {
+  background: white;
+  color: orange;
+  border: 2px solid orange;
+}
+p {
+  color: gray;
+}
+.loading {
+  margin: auto;
 }
