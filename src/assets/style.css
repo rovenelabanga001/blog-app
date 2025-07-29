@@ -31,3 +31,55 @@ p {
 .loading {
   margin: auto;
 }
+.signin-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  min-height: 70%;
+  width: 100%;
+  padding: 4rem;
+  background-color: white;
+}
+.form-container h3 {
+  color: rgb(8, 150, 182);
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 2rem;
+}
+.form-container form input {
+  border: 2px solid rgb(8, 150, 182);
+  outline: none;
+  height: 3rem;
+  transition: 0.3s;
+  padding: 0 1rem;
+}
+.form-container form input:focus {
+  border: 2px solid orangered;
+}
+.form-container button {
+  width: 30%;
+  align-self: center;
+  background-color: rgb(8, 150, 182);
+  border: none;
+  outline: none;
+  height: 3rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.form-container button:hover {
+  background-color: orangered;
+}

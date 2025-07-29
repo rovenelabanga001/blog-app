@@ -4,6 +4,8 @@ import About from '@/pages/About.vue'
 import Home from '@/pages/Home.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Posts from '@/pages/Posts.vue'
+import Signin from '@/pages/Signin.vue'
+import Signup from '@/pages/Signup.vue'
 import SinglePost from '@/pages/SinglePost.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -39,6 +41,14 @@ const routes = [
       default: About,
       navbar: NavBar,
     },
+  },
+  {
+    path: '/signin',
+    component: Signin
+  },
+  {
+    path: '/signup',
+    component: Signup
   },
   {
     path: '/:pathMatch(.*)*',
