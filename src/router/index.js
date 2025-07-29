@@ -16,7 +16,12 @@ const routes = [
     },
   },
   {
+    path: '/home',
+    redirect: '/',
+  },
+  {
     path: '/posts',
+    alias: '/blogs',
     components: {
       default: Posts,
       navbar: NavBar,
@@ -35,10 +40,13 @@ const routes = [
       navbar: NavBar,
     },
   },
-  { path: '/:pathMatch(.*)*', components: {
-    default: NotFound,
-    navbar: NavBar
-  } },
+  {
+    path: '/:pathMatch(.*)*',
+    components: {
+      default: NotFound,
+      navbar: NavBar,
+    },
+  },
 ]
 
 const router = createRouter({

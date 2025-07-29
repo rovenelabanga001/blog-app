@@ -1,9 +1,10 @@
 <script setup>
 import { provide, onMounted, ref } from 'vue'
-import NavBar from './components/NavBar.vue'
+import { useRouter } from 'vue-router'
 
 const posts = ref([])
 const loading = ref(true)
+const router = useRouter()
 
 onMounted(async () => {
   try {
@@ -19,6 +20,11 @@ onMounted(async () => {
   }
 })
 
+const handlePostClick = (postId) => {
+  router.push({ name: 'SinglePost', params: { id: postId } })
+}
+
+provide('onPostClick', handlePostClick)
 provide('posts', posts)
 provide('loading', loading)
 </script>
@@ -35,7 +41,7 @@ provide('loading', loading)
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8rem;
+  gap: 5rem;
   margin-bottom: 2rem;
 }
 </style>

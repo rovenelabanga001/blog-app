@@ -1,19 +1,21 @@
 <script setup>
 import Loading from '@/components/Loading.vue'
-import { inject, ref } from 'vue'
+import { inject, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const posts = inject('posts')
 const loading = inject('loading')
 
+const latestPosts = computed(() => {
+  return posts.value.slice(-3)
+})
 const goToPosts = () => {
   router.push({ path: '/posts' })
 }
 
-const handlePostClick = (postId) => {
-  router.push({ name: 'SinglePost', params: { id: postId } })
-}
+const onPostClick = inject('onPostClick')
+console.log()
 </script>
 <template>
   <div class="body-section home-container">
@@ -37,10 +39,10 @@ const handlePostClick = (postId) => {
     <div class="blogs-container">
       <Loading v-if="loading" />
       <div
-        v-for="post in posts"
+        v-for="post in latestPosts"
         :key="post.id"
         class="blog"
-        @click="handlePostClick(post.id)"
+        @click="onPostClick(post.id)"
         v-else
       >
         <h6>{{ post.title }}</h6>
@@ -78,12 +80,13 @@ const handlePostClick = (postId) => {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  gap: 1rem;
   box-shadow: 3px 4px 5px 4px rgb(204, 202, 202);
   height: 20vh;
   min-height: 20vh;
   max-height: 20vh;
   width: 27%;
-  padding: 1rem;
+  padding: 2rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
