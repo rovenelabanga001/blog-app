@@ -8,7 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const user = ref(null)
 
-  const isAuthenticated = computed(() => !!user.value)
+  const isAuthenticated = computed(() => !!user.value) //use double negation to turn object to boolean
 
   const login = async (credentials) => {
     try {
@@ -23,6 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('user', JSON.stringify(user.value))
 
       router.push('/home')
+      console.log('Logged in')
     } catch (err) {
       console.error(err)
     }
@@ -32,6 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null
     localStorage.removeItem('user')
     router.push('/signin')
+    console.log('logged out')
   }
 
   const init = () => {

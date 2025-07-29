@@ -1,3 +1,9 @@
+<script setup>
+import { useAuthStore } from '@/stores/auth'
+
+const auth = useAuthStore()
+const { logout } = auth
+</script>
 <template>
   <nav>
     <h3>
@@ -18,6 +24,8 @@
             >Posts</router-link
           >
         </li>
+
+        <button @click="logout">Log Out</button>
       </ul>
     </div>
   </nav>
@@ -41,6 +49,7 @@ nav div.link-container ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   gap: 20px;
   padding: 3rem;
 }
@@ -49,6 +58,20 @@ nav div.link-container ul li {
   font-size: large;
   font-weight: 800;
   cursor: pointer;
+}
+nav div.link-container ul button {
+  background: orange;
+  border: none;
+  outline: none;
+  color: white;
+  width: 6rem;
+  height: 3rem;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+nav div.link-container ul button:hover {
+  background-color: rgb(239, 174, 54);
 }
 .nav-link {
   text-decoration: none;

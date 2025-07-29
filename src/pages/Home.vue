@@ -1,5 +1,6 @@
 <script setup>
 import Loading from '@/components/Loading.vue'
+import { useAuthStore } from '@/stores/auth'
 import { inject, computed } from 'vue'
 import { useRouter } from 'vue-router'
 

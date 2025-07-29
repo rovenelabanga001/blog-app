@@ -7,6 +7,7 @@ import Posts from '@/pages/Posts.vue'
 import Signin from '@/pages/Signin.vue'
 import Signup from '@/pages/Signup.vue'
 import SinglePost from '@/pages/SinglePost.vue'
+import { useAuthStore } from '@/stores/auth'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
@@ -16,6 +17,15 @@ const routes = [
       default: Home,
       navbar: NavBar,
     },
+    meta: { requiresAuth: true },
+    // beforeEnter: (to, from, next) => {
+    //   const auth = useAuthStore()
+    //   if (!auth.isAuthenticated) {
+    //     next('/signin')
+    //   } else {
+    //     next()
+    //   }
+    // },
   },
   {
     path: '/home',
@@ -28,11 +38,13 @@ const routes = [
       default: Posts,
       navbar: NavBar,
     },
+    meta: { requiresAuth: true },
   },
   {
     path: '/posts/:id(\\d+)',
     name: 'SinglePost',
     component: SinglePost,
+    meta: { requiresAuth: true },
     children: [{ path: 'comments', name: 'PostComments', component: Commments }],
   },
   {
@@ -41,14 +53,15 @@ const routes = [
       default: About,
       navbar: NavBar,
     },
+    meta: { requiresAuth: true },
   },
   {
     path: '/signin',
-    component: Signin
+    component: Signin,
   },
   {
     path: '/signup',
-    component: Signup
+    component: Signup,
   },
   {
     path: '/:pathMatch(.*)*',
@@ -63,6 +76,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   strict: true,
+})
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    next('/signin')
+  } else {
+    next()
+  }
 })
 
 export default router
