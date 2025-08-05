@@ -1,7 +1,14 @@
 <script setup>
+import { baseUrl } from '@/config'
 import useVuelidate from '@vuelidate/core'
 import { email, helpers, minLength, required } from '@vuelidate/validators'
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
+const router = useRouter()
+const loading = ref(false)
 const newUser = reactive({
   firstName: '',
   lastName: '',
@@ -26,9 +33,57 @@ const rules = computed(() => ({
 }))
 
 const v$ = useVuelidate(rules, newUser)
+
+const handleSignUpSubmit = async () => {
+  loading.value = true
+  if (v$.value.$invalid) {
+    return
+  }
+
+  try {
+    const checkRes = await fetch(`${baseUrl}/users?email=${encodeURIComponent(newUser.email)}`)
+    const existingUsers = await checkRes.json()
+
+    if (existingUsers.length > 0) {
+      toast.error('Email already exists')
+      return
+    }
+
+    const res = await fetch(`${baseUrl}/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        email: newUser.email,
+        password: newUser.password,
+      }),
+    })
+
+    if (!res.ok) throw new Error('Error fetching data')
+
+    toast.success('Sign up successful')
+    router.push('/signin')
+
+    Object.assign(newUser, {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    })
+
+    v$.value.$reset()
+  } catch (err) {
+    toast.error('Signup Failed')
+    console.error(err.message)
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSignUpSubmit">
     <!-- First Name -->
     <div class="input-container">
       <label for="firstName">First Name</label>
@@ -118,6 +173,9 @@ const v$ = useVuelidate(rules, newUser)
       </p>
     </div>
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" :disabled="loading">
+      <span v-if="loading" class="spinner"></span>
+      <span v-else>Sign Up</span>
+    </button>
   </form>
 </template>
