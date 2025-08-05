@@ -1,46 +1,51 @@
 import { defineStore } from 'pinia'
-import { inject, ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 
-export const useAuthStore = defineStore('auth', () => {
-  const baseUrl = inject('baseUrl')
-  const router = useRouter()
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: JSON.parse(localStorage.getItem('user')) || null,
+  }),
 
-  const user = ref(null)
+  getters: {
+    isAuthenticated: (state) => !!state.user,
+    username: (state) => (state.user ? `${state.user.firstName}  ${state.user.lastName}` : null),
+  },
 
-  const isAuthenticated = computed(() => !!user.value) //use double negation to turn object to boolean
+  actions: {
+    async login(credentials, toast, router, baseUrl) {
+      try {
+        const res = await fetch(
+          `${baseUrl}/users?email=${credentials.email}&password=${credentials.password}`,
+        )
 
-  const login = async (credentials) => {
-    try {
-      const res = await fetch(
-        `${baseUrl.value}/users?email=${credentials.email}&password=${credentials.password}`,
-      )
-      const data = await res.json()
+        if (!res.ok) throw new Error('Error fetching user data')
 
-      if (data.length === 0) throw new Error('Invalid email or password')
+        const data = await res.json()
 
-      user.value = data[0]
-      localStorage.setItem('user', JSON.stringify(user.value))
+        if (data.length === 0) {
+          throw new Error('Invalid email or password')
+        }
 
-      router.push('/home')
-      console.log('Logged in')
-    } catch (err) {
-      console.error(err)
-    }
-  }
+        this.user = data[0]
+        localStorage.setItem('user', JSON.stringify(this.user))
+        router.push('/home')
+        console.log('Logged in')
+      } catch (err) {
+        toast.error(err.message || 'Something went wrong')
+        console.error(err)
+      }
+    },
 
-  const logout = () => {
-    user.value = null
-    localStorage.removeItem('user')
-    router.push('/signin')
-    console.log('logged out')
-  }
-
-  const init = () => {
-    const storedUser = localStorage.getItem('user')
-
-    if (storedUser) user.value = JSON.parse(storedUser)
-  }
-
-  return { user, isAuthenticated, login, logout, init }
+    logout(router) {
+      this.user = null
+      localStorage.removeItem('user')
+      router.push('/signin')
+      console.log('Logged Out')
+    },
+    init() {
+      const storedUser = localStorage.getItem('user')
+      if (!storedUser) {
+        this.user = JSON.parse(storedUser)
+      }
+    },
+  },
 })

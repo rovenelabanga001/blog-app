@@ -1,8 +1,15 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
+const router = useRouter()
+
 const { logout } = auth
+
+const onLogOutClick = () => {
+  logout(router)
+}
 </script>
 <template>
   <nav>
@@ -25,7 +32,7 @@ const { logout } = auth
           >
         </li>
 
-        <button @click="logout">Log Out</button>
+        <button @click="onLogOutClick">Log Out</button>
       </ul>
     </div>
   </nav>

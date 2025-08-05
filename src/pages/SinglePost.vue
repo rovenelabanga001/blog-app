@@ -3,6 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import Loading from '@/components/Loading.vue'
 import PostComments from '@/components/PostComments.vue'
+import { baseUrl } from '@/config'
 
 const post = ref(null)
 const route = useRoute()
@@ -13,7 +14,7 @@ const showComments = ref(false)
 
 onMounted(async () => {
   try {
-    const res = await fetch(`http://localhost:3000/posts/${postId}`)
+    const res = await fetch(`${baseUrl}/posts/${postId}`)
     if (!res.ok) {
       throw new Error('Failed to fetch post')
     }
