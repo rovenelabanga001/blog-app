@@ -1,6 +1,7 @@
 import NavBar from '@/components/NavBar.vue'
 import Commments from '@/components/PostComments.vue'
 import About from '@/pages/About.vue'
+import AddBlog from '@/pages/AddBlog.vue'
 import Home from '@/pages/Home.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Posts from '@/pages/Posts.vue'
@@ -18,14 +19,6 @@ const routes = [
       navbar: NavBar,
     },
     meta: { requiresAuth: true },
-    // beforeEnter: (to, from, next) => {
-    //   const auth = useAuthStore()
-    //   if (!auth.isAuthenticated) {
-    //     next('/signin')
-    //   } else {
-    //     next()
-    //   }
-    // },
   },
   {
     path: '/home',
@@ -46,6 +39,12 @@ const routes = [
     component: SinglePost,
     meta: { requiresAuth: true },
     children: [{ path: 'comments', name: 'PostComments', component: Commments }],
+  },
+  {
+    path: '/add-blog',
+    component: AddBlog,
+    meta: { requiresAuth: true },
+    name: 'AddBlog',
   },
   {
     path: '/about',

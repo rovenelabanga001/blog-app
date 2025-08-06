@@ -4,17 +4,16 @@ import Loading from '@/components/Loading.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 import { inject, ref, computed } from 'vue'
-import { Eye, EyeOff } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 
 const posts = inject('posts')
 const error = inject('error')
+
 const searchQuery = ref('')
 
 const authStore = useAuthStore()
-const userId = authStore.user?.id
 const { readPosts } = authStore
-console.log(readPosts)
-console.log(posts)
+const router = useRouter()
 
 const filteredPosts = computed(() => {
   const query = searchQuery.value.toLowerCase()
@@ -22,6 +21,10 @@ const filteredPosts = computed(() => {
     (post) => post.title.toLowerCase().includes(query) || post.author.toLowerCase().includes(query),
   )
 })
+
+const onAddBlogClick = () => {
+  router.push({ name: 'AddBlog' })
+}
 
 const onPostClick = inject('onPostClick')
 const formattedDate = (isoDateString) => {
@@ -38,6 +41,7 @@ const formattedDate = (isoDateString) => {
     <ErrorComponent v-if="error" :message="error" />
     <div class="search-container" v-else-if="!error">
       <input type="text" placeholder="Search for post by name or author" v-model="searchQuery" />
+      <button @click="onAddBlogClick">Add Blog</button>
     </div>
     <div class="body-section blog-card-container">
       <div
@@ -66,9 +70,42 @@ const formattedDate = (isoDateString) => {
       </div>
       <Loading v-else />
     </div>
+    <RouterView />
   </DefaultLayout>
 </template>
 <style scoped>
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.search-container input {
+  width: 30%;
+  height: 2rem;
+  border-radius: 2rem;
+  padding: 0 4px;
+  outline: none;
+  border: 3px solid rgb(8, 150, 182);
+  transition: 0.3s;
+}
+.search-container button {
+  background-color: orange;
+  color: white;
+  border: none;
+  height: 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.search-container button:hover {
+  background-color: rgb(239, 174, 54);
+}
+.search-container input::placeholder {
+  color: gray;
+}
+.search-container input:focus {
+  border: 3px solid rgba(252, 164, 2, 0.475);
+}
 .blog-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -119,26 +156,5 @@ const formattedDate = (isoDateString) => {
 }
 .blog-card:hover .card-header h4 {
   color: white;
-}
-.search-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.search-container input {
-  width: 50%;
-  height: 2rem;
-  border-radius: 2rem;
-  padding: 0 4px;
-  outline: none;
-  border: 3px solid rgb(8, 150, 182);
-  transition: 0.3s;
-}
-.search-container input::placeholder {
-  color: gray;
-}
-.search-container input:focus {
-  border: 3px solid rgba(252, 164, 2, 0.475);
 }
 </style>
