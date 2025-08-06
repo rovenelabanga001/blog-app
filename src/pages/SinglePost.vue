@@ -49,7 +49,7 @@ const onBackBtnClick = () => {
         {{ showComments ? 'Hide Comments' : 'Show Comments' }}
       </button>
 
-      <PostComments :post="post" v-if="showComments" />
+      <PostComments :post="post" v-if="showComments" :postId="postId" />
     </div>
     <div v-else>
       <p>Post Not Found</p>

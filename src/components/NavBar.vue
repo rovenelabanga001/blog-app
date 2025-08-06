@@ -1,11 +1,14 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import { User } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
-const auth = useAuthStore()
+const authStore = useAuthStore()
 const router = useRouter()
 
-const { logout } = auth
+const { logout, username } = authStore
+// const { username } = storeToRefs(authStore)
+console.log(username)
 
 const onLogOutClick = () => {
   logout(router)
@@ -31,8 +34,11 @@ const onLogOutClick = () => {
             >Posts</router-link
           >
         </li>
-
         <button @click="onLogOutClick">Log Out</button>
+        <div class="username-container">
+          <User color="orange" />
+          <h6 style="color: orange; font-size: 1rem">{{ username }}</h6>
+        </div>
       </ul>
     </div>
   </nav>
@@ -76,6 +82,11 @@ nav div.link-container ul button {
   text-align: center;
   cursor: pointer;
   transition: 0.3s all;
+}
+nav div.link-container ul .username-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 nav div.link-container ul button:hover {
   background-color: rgb(239, 174, 54);
