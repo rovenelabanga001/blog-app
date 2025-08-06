@@ -4,9 +4,13 @@ import { onMounted, ref } from 'vue'
 import CommentCard from './CommentCard.vue'
 import AddCommmentInput from './AddCommmentInput.vue'
 import { Plus, XCircle } from 'lucide-vue-next'
+import { useAuthStore } from '@/stores/auth'
 
 const props = defineProps(['post', 'postId'])
 const { post, postId } = props
+const authStore = useAuthStore()
+const { username } = authStore
+
 const comments = ref([])
 const showAddComments = ref(false)
 
@@ -28,6 +32,9 @@ onMounted(() => {
 const handleAddComment = (newComment) => {
   comments.value.splice(0, 0, newComment)
 }
+const handleDeleteComment = (commentId) => {
+  comments.value = comments.value.filter((comment) => comment.id !== commentId)
+}
 </script>
 <template>
   <div class="comments-section">
@@ -37,7 +44,12 @@ const handleAddComment = (newComment) => {
       <Plus v-else-if="!showAddComments" />
     </button>
     <AddCommmentInput v-if="showAddComments" :postId="postId" @add-comment="handleAddComment" />
-    <CommentCard v-if="comments && comments.length" :comments="comments" />
+    <CommentCard
+      v-if="comments && comments.length"
+      :comments="comments"
+      :username="username"
+      @delete-comment="handleDeleteComment"
+    />
     <p v-else>No comments yet</p>
   </div>
 </template>

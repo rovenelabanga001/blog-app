@@ -1,5 +1,6 @@
 <script setup>
 import Loading from '@/components/Loading.vue'
+import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 import { inject, computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -19,41 +20,43 @@ const onPostClick = inject('onPostClick')
 console.log()
 </script>
 <template>
-  <div class="body-section home-container">
-    <h1>Welcome to my vue blog</h1>
-    <p>
-      Explore tutorials, tips, and articles about Vue and web development. Learn how to build
-      dynamic user interfaces, master Vue Router for seamless navigation, and improve your front-end
-      skills with hands-on examples. Whether you're a beginner or looking to sharpen your expertise,
-      you'll find valuable resources to guide your development journey.
-    </p>
+  <DefaultLayout>
+    <div class="body-section home-container">
+      <h1>Welcome to my vue blog</h1>
+      <p>
+        Explore tutorials, tips, and articles about Vue and web development. Learn how to build
+        dynamic user interfaces, master Vue Router for seamless navigation, and improve your
+        front-end skills with hands-on examples. Whether you're a beginner or looking to sharpen
+        your expertise, you'll find valuable resources to guide your development journey.
+      </p>
 
-    <button @click="goToPosts">View all posts</button>
-  </div>
+      <button @click="goToPosts">View all posts</button>
+    </div>
 
-  <div class="body-section home-container">
-    <h1>Latest blogs</h1>
-    <p>
-      Stay up to date with our latest vlogs featuring hands-on coding sessions, project
-      walkthroughs, and insightful discussions on web development trends.
-    </p>
-    <div class="blogs-container">
-      <Loading v-if="loading" />
-      <div
-        v-for="post in latestPosts"
-        :key="post.id"
-        class="blog"
-        @click="onPostClick(post.id)"
-        v-else
-      >
-        <h6>{{ post.title }}</h6>
-        <p>{{ post.author }}</p>
+    <div class="body-section home-container">
+      <h1>Latest blogs</h1>
+      <p>
+        Stay up to date with our latest vlogs featuring hands-on coding sessions, project
+        walkthroughs, and insightful discussions on web development trends.
+      </p>
+      <div class="blogs-container">
+        <Loading v-if="loading" />
+        <div
+          v-for="post in latestPosts"
+          :key="post.id"
+          class="blog"
+          @click="onPostClick(post.id)"
+          v-else
+        >
+          <h6>{{ post.title }}</h6>
+          <p>{{ post.author }}</p>
+        </div>
+      </div>
+      <div>
+        <RouterLink to="/posts">View all</RouterLink>
       </div>
     </div>
-    <div>
-      <RouterLink to="/posts">View all</RouterLink>
-    </div>
-  </div>
+  </DefaultLayout>
 </template>
 <style scoped>
 .home-container {

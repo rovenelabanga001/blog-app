@@ -96,109 +96,109 @@
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "author": "Jane",
       "text": "Very helpful post, thanks!",
       "postId": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Ken",
       "text": "Vue 3 looks amazing!",
       "postId": "1"
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "Mary",
       "text": "I finally understand Composition API now.",
       "postId": "1"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Emma",
       "text": "The proxy explanation was super clear.",
       "postId": "2"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Ali",
       "text": "Now I finally understand reactivity!",
       "postId": "2"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Carlos",
       "text": "Exactly what I needed for my project.",
       "postId": "3"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Susan",
       "text": "The examples were very clear.",
       "postId": "3"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Jane",
       "text": "Great breakdown of lifecycle hooks.",
       "postId": "5"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Tom",
       "text": "Very useful for debugging issues.",
       "postId": "5"
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "Kim",
       "text": "I wish I read this earlier.",
       "postId": "5"
     },
     {
-      "id": 4,
+      "id": "4",
       "author": "Ben",
       "text": "onUnmounted was new to me!",
       "postId": "5"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Victor",
       "text": "Deployment made easy, thanks!",
       "postId": "6"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Eliza",
       "text": "Love the idea of rapid prototyping!",
       "postId": "7"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Moses",
       "text": "Helped me test a project idea fast.",
       "postId": "7"
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "Janet",
       "text": "Very practical example.",
       "postId": "7"
     },
     {
-      "id": 1,
+      "id": "1",
       "author": "Samuel",
       "text": "Tailwind + Vue is a great combo.",
       "postId": "8"
     },
     {
-      "id": 2,
+      "id": "2",
       "author": "Chris",
       "text": "Nice overview of styling options.",
       "postId": "8"
     },
     {
-      "id": 3,
+      "id": "3",
       "author": "Angela",
       "text": "Scoped CSS makes my life easier.",
       "postId": "8"

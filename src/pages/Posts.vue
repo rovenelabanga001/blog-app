@@ -1,5 +1,6 @@
 <script setup>
 import Loading from '@/components/Loading.vue'
+import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { inject, ref, computed } from 'vue'
 
 const posts = inject('posts')
@@ -23,25 +24,32 @@ const formattedDate = (isoDateString) => {
 }
 </script>
 <template>
-  <div class="search-container">
-    <input type="text" placeholder="Search for post by name or author" v-model="searchQuery" />
-  </div>
-  <div class="body-section blog-card-container">
-    <div v-for="post in filteredPosts" class="blog-card" @click="onPostClick(post.id)" v-if="filteredPosts">
-      <div class="card-header">
-        <h4 style="font-size: small">{{ post.title }}</h4>
-      </div>
-      <div class="card-footer">
-        <p style="color: white; font-size: smaller; font-style: italic">
-          {{ post.author }}
-        </p>
-        <p style="color: white; font-size: smaller; font-style: italic">
-          {{ formattedDate(post.publishedAt) }}
-        </p>
-      </div>
+  <DefaultLayout>
+    <div class="search-container">
+      <input type="text" placeholder="Search for post by name or author" v-model="searchQuery" />
     </div>
-    <Loading v-else />
-  </div>
+    <div class="body-section blog-card-container">
+      <div
+        v-for="post in filteredPosts"
+        class="blog-card"
+        @click="onPostClick(post.id)"
+        v-if="filteredPosts"
+      >
+        <div class="card-header">
+          <h4 style="font-size: small">{{ post.title }}</h4>
+        </div>
+        <div class="card-footer">
+          <p style="color: white; font-size: smaller; font-style: italic">
+            {{ post.author }}
+          </p>
+          <p style="color: white; font-size: smaller; font-style: italic">
+            {{ formattedDate(post.publishedAt) }}
+          </p>
+        </div>
+      </div>
+      <Loading v-else />
+    </div>
+  </DefaultLayout>
 </template>
 <style scoped>
 .blog-card-container {

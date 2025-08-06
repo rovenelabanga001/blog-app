@@ -2,19 +2,18 @@
 import { provide, onMounted, ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from './stores/auth'
+import { baseUrl } from './config'
 
 const auth = useAuthStore()
 const router = useRouter()
 auth.init()
-
-const baseUrl = inject('baseUrl')
 
 const posts = ref([])
 const loading = ref(true)
 
 onMounted(async () => {
   try {
-    const res = await fetch(`${baseUrl.value}/posts`)
+    const res = await fetch(`${baseUrl}/posts`)
     if (!res.ok) {
       throw new Error('Failed to fetch posts')
     }
@@ -37,7 +36,6 @@ provide('loading', loading)
 
 <template>
   <div class="app-container">
-    <router-view name="navbar" />
     <router-view />
   </div>
 </template>
