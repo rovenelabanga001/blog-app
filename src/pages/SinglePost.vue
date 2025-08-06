@@ -4,23 +4,32 @@ import { onMounted, ref } from 'vue'
 import Loading from '@/components/Loading.vue'
 import PostComments from '@/components/PostComments.vue'
 import { baseUrl } from '@/config'
+import ErrorComponent from '@/components/ErrorComponent.vue'
 
-const post = ref(null)
 const route = useRoute()
 const router = useRouter()
 const postId = route.params.id
+
+const post = ref(null)
 const isLoading = ref(true)
 const showComments = ref(false)
+const error = ref(null)
 
 onMounted(async () => {
+  error.value = null
   try {
     const res = await fetch(`${baseUrl}/posts/${postId}`)
     if (!res.ok) {
-      throw new Error('Failed to fetch post')
+      if (res.status === 404) {
+        throw new Error('Post not found')
+      } else {
+        throw new Error('Failed to fetch post')
+      }
     }
     post.value = await res.json()
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    error.value = err.message || 'Unable to load posts. Please try again later'
+    console.error(err)
   } finally {
     isLoading.value = false
   }
@@ -33,7 +42,8 @@ const onBackBtnClick = () => {
 <template>
   <div class="body-section post-section">
     <Loading v-if="isLoading" />
-    <div v-else-if="post" class="post">
+    <ErrorComponent v-else-if="error" :message="error" />
+    <div v-else-if="post && !error" class="post">
       <div class="post-header">
         <h1>{{ post.title }}</h1>
         <h6>
@@ -51,9 +61,9 @@ const onBackBtnClick = () => {
 
       <PostComments :post="post" v-if="showComments" :postId="postId" />
     </div>
-    <div v-else>
+    <!-- <div v-else>
       <p>Post Not Found</p>
-    </div>
+    </div> -->
   </div>
 </template>
 <style scoped>

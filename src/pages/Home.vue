@@ -1,13 +1,14 @@
 <script setup>
+import ErrorComponent from '@/components/ErrorComponent.vue'
 import Loading from '@/components/Loading.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
-import { useAuthStore } from '@/stores/auth'
 import { inject, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const posts = inject('posts')
 const loading = inject('loading')
+const error = inject('error')
 
 const latestPosts = computed(() => {
   return posts.value.slice(-3)
@@ -33,7 +34,8 @@ console.log()
       <button @click="goToPosts">View all posts</button>
     </div>
 
-    <div class="body-section home-container">
+    <ErrorComponent v-if="error" :message="error" />
+    <div class="body-section home-container" v-else-if="!error">
       <h1>Latest blogs</h1>
       <p>
         Stay up to date with our latest vlogs featuring hands-on coding sessions, project

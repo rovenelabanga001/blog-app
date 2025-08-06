@@ -1,9 +1,11 @@
 <script setup>
+import ErrorComponent from '@/components/ErrorComponent.vue'
 import Loading from '@/components/Loading.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { inject, ref, computed } from 'vue'
 
 const posts = inject('posts')
+const error = inject('error')
 const searchQuery = ref('')
 
 const filteredPosts = computed(() => {
@@ -25,7 +27,8 @@ const formattedDate = (isoDateString) => {
 </script>
 <template>
   <DefaultLayout>
-    <div class="search-container">
+    <ErrorComponent v-if="error" :message="error" />
+    <div class="search-container" v-else-if="!error">
       <input type="text" placeholder="Search for post by name or author" v-model="searchQuery" />
     </div>
     <div class="body-section blog-card-container">

@@ -10,16 +10,19 @@ auth.init()
 
 const posts = ref([])
 const loading = ref(true)
+const error = ref(null)
 
 onMounted(async () => {
+  error.value = null
   try {
     const res = await fetch(`${baseUrl}/posts`)
     if (!res.ok) {
-      throw new Error('Failed to fetch posts')
+      throw new Error('Unable to fetch posts try again later')
     }
     posts.value = await res.json()
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    error.value = 'Unable to get posts. Please try again later'
+    console.error(err.message)
   } finally {
     loading.value = false
   }
@@ -32,6 +35,7 @@ const handlePostClick = (postId) => {
 provide('onPostClick', handlePostClick)
 provide('posts', posts)
 provide('loading', loading)
+provide('error', error)
 </script>
 
 <template>

@@ -5,6 +5,7 @@ import CommentCard from './CommentCard.vue'
 import AddCommmentInput from './AddCommmentInput.vue'
 import { Plus, XCircle } from 'lucide-vue-next'
 import { useAuthStore } from '@/stores/auth'
+import ErrorComponent from './ErrorComponent.vue'
 
 const props = defineProps(['post', 'postId'])
 const { post, postId } = props
@@ -13,8 +14,10 @@ const { username } = authStore
 
 const comments = ref([])
 const showAddComments = ref(false)
+const error = ref(null)
 
 const getComments = async () => {
+  error.value = null
   try {
     const res = await fetch(`${baseUrl}/comments?postId=${postId}`)
 
@@ -22,6 +25,7 @@ const getComments = async () => {
 
     comments.value = await res.json()
   } catch (err) {
+    error.value = 'Unable to load comments. Please try again later'
     console.error(err)
   }
 }
@@ -43,9 +47,14 @@ const handleDeleteComment = (commentId) => {
       <XCircle v-if="showAddComments" />
       <Plus v-else-if="!showAddComments" />
     </button>
-    <AddCommmentInput v-if="showAddComments" :postId="postId" @add-comment="handleAddComment" />
+    <AddCommmentInput
+      v-if="showAddComments && !error"
+      :postId="postId"
+      @add-comment="handleAddComment"
+    />
+    <ErrorComponent v-if="error" :message="error" />
     <CommentCard
-      v-if="comments && comments.length"
+      v-else-if="comments && comments.length"
       :comments="comments"
       :username="username"
       @delete-comment="handleDeleteComment"
