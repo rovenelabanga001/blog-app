@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import Loading from '@/components/Loading.vue'
+import { useAuthStore } from '@/stores/auth'
 import { baseUrl } from '@/config'
 import ErrorComponent from '@/components/ErrorComponent.vue'
 import SinglePostBody from '@/components/SinglePostBody.vue'
@@ -9,6 +10,10 @@ import SinglePostBody from '@/components/SinglePostBody.vue'
 const route = useRoute()
 const router = useRouter()
 const postId = route.params.id
+
+const authStore = useAuthStore()
+const userId = authStore.user?.id
+const { readPosts } = authStore
 
 const post = ref(null)
 const isLoading = ref(true)
@@ -34,6 +39,16 @@ onMounted(async () => {
   }
 })
 
+const handleUpdateStatus = (newStatus) => {
+  if (newStatus !== undefined) {
+    if (newStatus) {
+      readPosts.push(postId)
+    } else {
+      readPosts.value = readPosts.value.filter((id) => id !== postId)
+    }
+  }
+}
+
 const onBackBtnClick = () => {
   router.back()
 }
@@ -47,6 +62,9 @@ const onBackBtnClick = () => {
       :post="post"
       :onBackBtnClick="onBackBtnClick"
       :postId="postId"
+      :userId="userId"
+      :readPosts="readPosts"
+      @update-status="handleUpdateStatus"
     />
   </div>
 </template>

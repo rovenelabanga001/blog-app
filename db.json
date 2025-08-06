@@ -7,9 +7,13 @@
       "firstName": "Test",
       "lastName": "User",
       "readPosts": [
-        1,
-        2,
-        4
+        [
+          1,
+          2,
+          4,
+          "6"
+        ],
+        "3"
       ]
     },
     {

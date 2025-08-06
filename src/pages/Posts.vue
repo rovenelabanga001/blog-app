@@ -14,6 +14,7 @@ const authStore = useAuthStore()
 const userId = authStore.user?.id
 const { readPosts } = authStore
 console.log(readPosts)
+console.log(posts)
 
 const filteredPosts = computed(() => {
   const query = searchQuery.value.toLowerCase()
@@ -55,10 +56,12 @@ const formattedDate = (isoDateString) => {
           <p style="color: white; font-size: smaller; font-style: italic">
             {{ formattedDate(post.publishedAt) }} {{ post.id }}
           </p>
-          <button class="read">
-            <Eye v-if="readPosts.includes(post.id)" />
-            <EyeOff v-else />
-          </button>
+          <p class="read" style="font-style: italic">
+            <span v-if="readPosts.map(String).includes(String(post.id))" style="color: yellow"
+              >Read</span
+            >
+            <span v-else style="color: lightgray">Unread</span>
+          </p>
         </div>
       </div>
       <Loading v-else />
@@ -98,16 +101,16 @@ const formattedDate = (isoDateString) => {
   padding: 0 3px;
   height: 30%;
 }
-.blog-card .card-footer button.read {
+.blog-card .card-footer p.read {
   background: none;
 }
-.blog-card .card-footer button.read svg {
+.blog-card .card-footer p.read svg {
   color: white;
 }
-.blog-card .card-footer button.read svg:hover {
+.blog-card .card-footer p.read svg:hover {
   color: orange;
 }
-.blog-card .card-footer button.read:hover {
+.blog-card .card-footer p.read:hover {
   border: none;
 }
 .blog-card:hover {
