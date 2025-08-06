@@ -2,11 +2,18 @@
 import ErrorComponent from '@/components/ErrorComponent.vue'
 import Loading from '@/components/Loading.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
+import { useAuthStore } from '@/stores/auth'
 import { inject, ref, computed } from 'vue'
+import { Eye, EyeOff } from 'lucide-vue-next'
 
 const posts = inject('posts')
 const error = inject('error')
 const searchQuery = ref('')
+
+const authStore = useAuthStore()
+const userId = authStore.user?.id
+const { readPosts } = authStore
+console.log(readPosts)
 
 const filteredPosts = computed(() => {
   const query = searchQuery.value.toLowerCase()
@@ -46,8 +53,12 @@ const formattedDate = (isoDateString) => {
             {{ post.author }}
           </p>
           <p style="color: white; font-size: smaller; font-style: italic">
-            {{ formattedDate(post.publishedAt) }}
+            {{ formattedDate(post.publishedAt) }} {{ post.id }}
           </p>
+          <button class="read">
+            <Eye v-if="readPosts.includes(post.id)" />
+            <EyeOff v-else />
+          </button>
         </div>
       </div>
       <Loading v-else />
@@ -82,9 +93,22 @@ const formattedDate = (isoDateString) => {
 .blog-card .card-footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: rgb(8, 150, 182);
   padding: 0 3px;
   height: 30%;
+}
+.blog-card .card-footer button.read {
+  background: none;
+}
+.blog-card .card-footer button.read svg {
+  color: white;
+}
+.blog-card .card-footer button.read svg:hover {
+  color: orange;
+}
+.blog-card .card-footer button.read:hover {
+  border: none;
 }
 .blog-card:hover {
   background: orange;

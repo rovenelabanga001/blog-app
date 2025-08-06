@@ -35,6 +35,7 @@ const handleCommentSubmit = async () => {
 
     const savedComment = await res.json()
     emit('add-comment', savedComment)
+    commentText.value = ''
   } catch (error) {
     console.error(error)
   }

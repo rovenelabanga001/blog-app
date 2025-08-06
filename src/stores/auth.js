@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     isAuthenticated: (state) => !!state.user,
     username: (state) => (state.user ? `${state.user.firstName} ${state.user.lastName}` : null),
+    readPosts: (state) => state.user?.readPosts,
   },
 
   actions: {
@@ -25,7 +26,10 @@ export const useAuthStore = defineStore('auth', {
           throw new Error('Invalid email or password')
         }
 
-        this.user = data[0]
+        this.user = {
+          ...data[0],
+          readPosts: data[0].readPosts,
+        }
         localStorage.setItem('user', JSON.stringify(this.user))
         router.push('/home')
         console.log('Logged in')

@@ -57,6 +57,7 @@ const handleSignUpSubmit = async () => {
         lastName: newUser.lastName,
         email: newUser.email,
         password: newUser.password,
+        readPosts: [],
       }),
     })
 

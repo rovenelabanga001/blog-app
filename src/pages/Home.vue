@@ -91,7 +91,7 @@ console.log()
   height: 20vh;
   min-height: 20vh;
   max-height: 20vh;
-  width: 27%;
+  width: 25%;
   padding: 2rem;
   word-wrap: break-word;
   overflow-wrap: break-word;
