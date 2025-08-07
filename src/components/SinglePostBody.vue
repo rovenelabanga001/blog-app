@@ -2,11 +2,11 @@
 import PostComments from './PostComments.vue'
 import { ref } from 'vue'
 import { MessageSquareQuote, MessageSquareX } from 'lucide-vue-next'
-import { baseUrl } from '@/config'
+import { ArrowLeft } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const { post, postId} = defineProps(['post', 'postId'])
+const { post, postId } = defineProps(['post', 'postId'])
 const emit = defineEmits(['update-status'])
 const showComments = ref(false)
 const onBackBtnClick = () => {
@@ -25,7 +25,7 @@ const onBackBtnClick = () => {
       <p>{{ post.body }}</p>
     </div>
     <div class="post-btns">
-      <button @click="onBackBtnClick">Back</button>
+      <button @click="onBackBtnClick"><ArrowLeft /></button>
       <button id="comment-btn" @click="showComments = !showComments">
         <MessageSquareQuote v-if="!showComments" color="orange" />
         <MessageSquareX v-else-if="showComments" color="orange" />
@@ -45,7 +45,7 @@ const onBackBtnClick = () => {
   position: relative;
 }
 .post-btns button {
-  width: 7rem;
+  width: 4rem;
 }
 .post .post-btns button#comment-btn {
   background: none;
