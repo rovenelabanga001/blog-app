@@ -4,9 +4,10 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from './stores/auth'
 import { baseUrl } from './config'
 
-const auth = useAuthStore()
+const authStore = useAuthStore()
+const { readPosts } = authStore
 const router = useRouter()
-auth.init()
+authStore.init()
 
 const posts = ref([])
 const loading = ref(true)
@@ -28,7 +29,12 @@ onMounted(async () => {
   }
 })
 
-const handlePostClick = (postId) => {
+const handlePostClick = async (postId) => {
+  const isAlreadyRead = readPosts.map(String).includes(String(postId))
+
+  if (!isAlreadyRead) {
+    await authStore.markPostAsRead(postId, baseUrl)
+  }
   router.push({ name: 'SinglePost', params: { id: postId } })
 }
 

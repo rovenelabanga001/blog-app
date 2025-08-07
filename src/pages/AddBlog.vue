@@ -27,6 +27,23 @@ const router = useRouter()
 .add-post-form-container form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 50%;
+  gap: 1rem;
+}
+.add-post-form-container form input,
+textarea {
+  border: 2px solid black;
+  width: 100%;
+}
+.add-post-form-container form input {
+  height: 3rem;
+}
+.add-post-form-container form textarea {
+  height: 6rem;
+}
+.add-post-form-container form button {
+  justify-self: center;
 }
 </style>

@@ -51,5 +51,23 @@ export const useAuthStore = defineStore('auth', {
         this.user = JSON.parse(storedUser)
       }
     },
+    async markPostAsRead(postId, baseUrl) {
+      if (!this.readPosts.map(String).includes(String(postId))) {
+        const updatedPosts = [...this.readPosts, postId]
+
+        const res = await fetch(`${baseUrl}/users/${this.user.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ readPosts: updatedPosts }),
+        })
+
+        if (res.ok) {
+          this.readPosts.splice(0, this.readPosts.length, ...updatedPosts) // ✅ Safely replace contents
+          localStorage.setItem('user', this.user)
+        } else {
+          console.log('Failed to mark as read')
+        }
+      }
+    },
   },
 })

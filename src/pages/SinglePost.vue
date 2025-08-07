@@ -39,33 +39,21 @@ onMounted(async () => {
   }
 })
 
-const handleUpdateStatus = (newStatus) => {
-  if (newStatus !== undefined) {
-    if (newStatus) {
-      readPosts.push(postId)
-    } else {
-      readPosts.value = readPosts.value.filter((id) => id !== postId)
-    }
-  }
-}
-
-const onBackBtnClick = () => {
-  router.back()
-}
+// const handleUpdateStatus = (newStatus) => {
+//   if (newStatus !== undefined) {
+//     if (newStatus) {
+//       readPosts.push(postId)
+//     } else {
+//       readPosts.value = readPosts.value.filter((id) => id !== postId)
+//     }
+//   }
+// }
 </script>
 <template>
   <div class="body-section post-section">
     <Loading v-if="isLoading" />
     <ErrorComponent v-else-if="error" :message="error" />
-    <SinglePostBody
-      v-else-if="post && !error"
-      :post="post"
-      :onBackBtnClick="onBackBtnClick"
-      :postId="postId"
-      :userId="userId"
-      :readPosts="readPosts"
-      @update-status="handleUpdateStatus"
-    />
+    <SinglePostBody v-else-if="post && !error" :post="post" :postId="postId" />
   </div>
 </template>
 <style scoped>
