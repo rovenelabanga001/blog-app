@@ -25,19 +25,19 @@ const onLogOutClick = () => {
           <router-link to="/" exact-active-class="active-link" class="nav-link">Home</router-link>
         </li>
         <li>
-          <router-link to="/about" exact-active-class="active-link" class="nav-link"
-            >About</router-link
-          >
-        </li>
-        <li>
           <router-link to="/posts" exact-active-class="active-link" class="nav-link"
             >Posts</router-link
           >
         </li>
+        <li>
+          <router-link to="/my-blogs" exact-active-class="active-link" class="nav-link"
+            >My Blogs</router-link
+          >
+        </li>
         <button @click="onLogOutClick">Log Out</button>
         <div class="username-container">
-          <User color="orange" />
-          <h6 style="color: orange; font-size: 1rem">{{ username }}</h6>
+          <User color="white" />
+          <h6 style="color: white; font-size: 1rem">{{ username }}</h6>
         </div>
       </ul>
     </div>

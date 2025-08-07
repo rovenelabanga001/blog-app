@@ -7,7 +7,7 @@ const readPosts = computed(() => authStore.readPosts || [])
 
 const onPostClick = inject('onPostClick')
 
-const { filteredPosts } = defineProps(['filteredPosts'])
+const { filteredPosts, showReadStatus = true } = defineProps(['filteredPosts', 'showReadStatus'])
 
 const formattedDate = (isoDateString) => {
   const date = new Date(isoDateString)
@@ -30,7 +30,7 @@ const formattedDate = (isoDateString) => {
       <p style="color: white; font-size: smaller; font-style: italic">
         {{ formattedDate(post.publishedAt) }} {{ post.id }}
       </p>
-      <p class="read" style="font-style: italic">
+      <p class="read" style="font-style: italic" v-if="showReadStatus">
         <span v-if="readPosts.map(String).includes(String(post.id))" style="color: yellow"
           >Read</span
         >

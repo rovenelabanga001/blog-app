@@ -3,6 +3,7 @@ import BlogCard from '@/components/BlogCard.vue'
 import ErrorComponent from '@/components/ErrorComponent.vue'
 import Loading from '@/components/Loading.vue'
 import NoResults from '@/components/NoResults.vue'
+import SearchComponent from '@/components/SearchComponent.vue'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 import { inject, ref, computed } from 'vue'
@@ -39,13 +40,12 @@ const filteredPosts = computed(() => {
   <DefaultLayout>
     <ErrorComponent v-if="error" :message="error" />
     <div class="search-container" v-else-if="!error">
-      <input type="text" placeholder="Search for post by name or author" v-model="searchQuery" />
-      <form>
+      <SearchComponent v-model="searchQuery" :showAuthor="true" />
+      <form class="filter-form">
         <label for="filter-input">Filter: </label>
         <select name="" id="filter-input" v-model="statusFilter">
-          <option value="" disabled selected>Select Status</option>
           <option value="All">All</option>
-          <option value="Read" default>Read</option>
+          <option value="Read">Read</option>
           <option value="Unread">Unread</option>
         </select>
       </form>
@@ -56,7 +56,7 @@ const filteredPosts = computed(() => {
         v-else-if="filteredPosts && !filteredPosts.length && searchQuery"
         :searchQuery="searchQuery"
       />
-      <Loading v-else />
+      <Loading v-else-if="!error" />
     </div>
   </DefaultLayout>
 </template>
@@ -67,30 +67,19 @@ const filteredPosts = computed(() => {
   justify-content: space-around;
   align-items: center;
 }
-.search-container input {
-  width: 30%;
-  height: 2rem;
-  border-radius: 2rem;
-  padding: 0 4px;
-  outline: none;
+
+.search-container form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-container form select {
   border: 3px solid rgb(8, 150, 182);
-  transition: 0.3s;
+  background: none;
+  width: 80%;
+  outline: none;
 }
-.search-container button {
-  background-color: orange;
-  color: white;
-  border: none;
-  height: 2rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.search-container button:hover {
-  background-color: rgb(239, 174, 54);
-}
-.search-container input::placeholder {
-  color: gray;
-}
-.search-container input:focus {
+.search-container form select:focus {
   border: 3px solid rgba(252, 164, 2, 0.475);
 }
 

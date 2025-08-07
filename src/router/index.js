@@ -3,6 +3,7 @@ import Commments from '@/components/PostComments.vue'
 import About from '@/pages/About.vue'
 import AddBlog from '@/pages/AddBlog.vue'
 import Home from '@/pages/Home.vue'
+import MyBlogs from '@/pages/MyBlogs.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Posts from '@/pages/Posts.vue'
 import Signin from '@/pages/Signin.vue'
@@ -41,18 +42,24 @@ const routes = [
     children: [{ path: 'comments', name: 'PostComments', component: Commments }],
   },
   {
-    path: '/add-blog',
-    component: AddBlog,
-    meta: { requiresAuth: true },
-    name: 'AddBlog',
-  },
-  {
     path: '/about',
     components: {
       default: About,
       navbar: NavBar,
     },
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/add-blog',
+    component: AddBlog,
+    meta: { requiresAuth: true },
+    name: 'AddBlog',
+  },
+  {
+    path: '/my-blogs',
+    component: MyBlogs,
+    meta: { requiresAuth: true },
+    name: 'MyBlogs',
   },
   {
     path: '/signin',
