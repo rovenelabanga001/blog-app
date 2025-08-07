@@ -1,9 +1,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { inject } from 'vue'
+import { computed, inject } from 'vue'
 
 const authStore = useAuthStore()
-const { readPosts } = authStore
+const readPosts = computed(() => authStore.readPosts || [])
 
 const onPostClick = inject('onPostClick')
 

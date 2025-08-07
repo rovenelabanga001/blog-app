@@ -12,7 +12,8 @@
         4,
         "3",
         "6",
-        "5"
+        "5",
+        "7"
       ]
     },
     {
@@ -63,6 +64,53 @@
       "email": "red@gmail.com",
       "password": "123456",
       "readPosts": []
+    },
+    {
+      "id": "4638",
+      "firstName": "Deborah",
+      "lastName": "Koskei",
+      "email": "darbiekossy@gmail.com",
+      "password": "123456",
+      "readPosts": [
+        "6",
+        "5",
+        null
+      ]
+    },
+    {
+      "id": "a19a",
+      "firstName": "Dave",
+      "lastName": "o2",
+      "email": "dave@gmail.com",
+      "password": "123456",
+      "readPosts": [
+        "6",
+        "5"
+      ]
+    },
+    {
+      "id": "da87",
+      "firstName": "mike",
+      "lastName": "otieno",
+      "email": "mikeoti@gmail.com",
+      "password": "123456",
+      "readPosts": [
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "65b5",
+      "firstName": "Ian",
+      "lastName": "Evans",
+      "email": "ian@gmail.com",
+      "password": "123Ian4",
+      "readPosts": [
+        "3",
+        "6",
+        "2",
+        "5"
+      ]
     }
   ],
   "posts": [
@@ -250,6 +298,12 @@
       "postId": "2",
       "text": "What is the reactivity of sodium",
       "author": "JohnCena Otieno"
+    },
+    {
+      "id": "39a0",
+      "postId": "2",
+      "text": "Wow! Loved Every Bit",
+      "author": "Ian Evans"
     }
   ]
 }

@@ -12,8 +12,6 @@ const router = useRouter()
 const postId = route.params.id
 
 const authStore = useAuthStore()
-const userId = authStore.user?.id
-const { readPosts } = authStore
 
 const post = ref(null)
 const isLoading = ref(true)
@@ -38,16 +36,6 @@ onMounted(async () => {
     isLoading.value = false
   }
 })
-
-// const handleUpdateStatus = (newStatus) => {
-//   if (newStatus !== undefined) {
-//     if (newStatus) {
-//       readPosts.push(postId)
-//     } else {
-//       readPosts.value = readPosts.value.filter((id) => id !== postId)
-//     }
-//   }
-// }
 </script>
 <template>
   <div class="body-section post-section">

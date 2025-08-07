@@ -1,9 +1,21 @@
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    user: JSON.parse(localStorage.getItem('user')) || null,
-  }),
+  state: () => {
+    let user = null
+    try {
+      const stored = localStorage.getItem('user')
+      if (stored) {
+        user = JSON.parse(stored)
+      }
+    } catch (err) {
+      console.error('Invalid JSON in localStorage for "user":', err)
+      localStorage.removeItem('user')
+    }
+    return {
+      user,
+    }
+  },
 
   getters: {
     isAuthenticated: (state) => !!state.user,
@@ -28,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
 
         this.user = {
           ...data[0],
-          readPosts: data[0].readPosts,
+          readPosts: data[0].readPosts || [],
         }
         localStorage.setItem('user', JSON.stringify(this.user))
         router.push('/home')
@@ -45,12 +57,6 @@ export const useAuthStore = defineStore('auth', {
       router.push('/signin')
       console.log('Logged Out')
     },
-    init() {
-      const storedUser = localStorage.getItem('user')
-      if (!storedUser) {
-        this.user = JSON.parse(storedUser)
-      }
-    },
     async markPostAsRead(postId, baseUrl) {
       if (!this.readPosts.map(String).includes(String(postId))) {
         const updatedPosts = [...this.readPosts, postId]
@@ -63,10 +69,23 @@ export const useAuthStore = defineStore('auth', {
 
         if (res.ok) {
           this.readPosts.splice(0, this.readPosts.length, ...updatedPosts) // ✅ Safely replace contents
-          localStorage.setItem('user', this.user)
+          localStorage.setItem('user', JSON.stringify(this.user))
         } else {
           console.log('Failed to mark as read')
         }
+      }
+    },
+
+    init() {
+      try {
+        const storedUser = localStorage.getItem('user')
+        if (!storedUser) {
+          this.user = JSON.parse(storedUser)
+        }
+      } catch (e) {
+        console.error('Failed to initialize user from localStorage:', err)
+        localStorage.removeItem('user')
+        this.user = null
       }
     },
   },

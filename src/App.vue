@@ -5,7 +5,6 @@ import { useAuthStore } from './stores/auth'
 import { baseUrl } from './config'
 
 const authStore = useAuthStore()
-const { readPosts } = authStore
 const router = useRouter()
 authStore.init()
 
@@ -30,7 +29,7 @@ onMounted(async () => {
 })
 
 const handlePostClick = async (postId) => {
-  const isAlreadyRead = readPosts.map(String).includes(String(postId))
+  const isAlreadyRead = authStore.readPosts.map(String).includes(String(postId))
 
   if (!isAlreadyRead) {
     await authStore.markPostAsRead(postId, baseUrl)
