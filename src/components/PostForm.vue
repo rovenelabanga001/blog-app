@@ -88,7 +88,6 @@ textarea {
 }
 .add-post-form-container form input {
   height: 3rem;
-  display: flex;
 }
 .add-post-form-container form textarea {
   height: 6rem;

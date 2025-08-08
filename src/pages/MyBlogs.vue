@@ -110,6 +110,10 @@ const confirmDelete = (id) => {
     },
   )
 }
+
+const onEditClick = (postId) => {
+  router.push({ name: 'EditBlog', params: { id: postId } })
+}
 </script>
 
 <template>
@@ -131,7 +135,9 @@ const confirmDelete = (id) => {
             <button class="my-btn" @click.stop="confirmDelete(postId)">
               <Trash color="orange" :size="15" />
             </button>
-            <button class="my-btn"><Pencil color="orange" :size="15" /></button>
+            <button class="my-btn" @click.stop="onEditClick(postId)">
+              <Pencil color="orange" :size="15" />
+            </button>
           </template>
         </BlogCard>
       </div>

@@ -6,12 +6,14 @@ import { useAuthStore } from '@/stores/auth'
 import { baseUrl } from '@/config'
 import { useToast } from 'vue-toastification'
 import PostForm from '@/components/PostForm.vue'
+import PostFormHeader from '@/components/PostFormHeader.vue'
 
 const router = useRouter()
 const toast = useToast()
 const authStore = useAuthStore()
 const username = authStore.username
 const userId = authStore.user?.id
+const heading = ref('Add Blog')
 
 const error = ref(null)
 
@@ -44,9 +46,8 @@ const addBlog = async (data) => {
 
 <template>
   <div class="body-section add-post-form-container">
-    <button @click="router.back()"><ArrowLeft /></button>
-    <h3>Add Blog</h3>
-    <PostForm @submit="addBlog" buttonText="Add Blog" />
+    <PostFormHeader :heading="heading" />
+    <PostForm @submit="addBlog" :buttonText="heading" />
   </div>
 </template>
 <style scoped>

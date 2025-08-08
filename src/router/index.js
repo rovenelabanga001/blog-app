@@ -2,6 +2,7 @@ import NavBar from '@/components/NavBar.vue'
 import Commments from '@/components/PostComments.vue'
 import About from '@/pages/About.vue'
 import AddBlog from '@/pages/AddBlog.vue'
+import EditBlog from '@/pages/EditBlog.vue'
 import Home from '@/pages/Home.vue'
 import MyBlogs from '@/pages/MyBlogs.vue'
 import NotFound from '@/pages/NotFound.vue'
@@ -35,7 +36,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/posts/:id(\\d+)',
+    path: '/posts/:id',
     name: 'SinglePost',
     component: SinglePost,
     meta: { requiresAuth: true },
@@ -54,6 +55,12 @@ const routes = [
     component: AddBlog,
     meta: { requiresAuth: true },
     name: 'AddBlog',
+  },
+  {
+    path: '/edit-blog/:id',
+    component: EditBlog,
+    meta: { requiresAuth: true },
+    name: 'EditBlog',
   },
   {
     path: '/my-blogs',

@@ -15,7 +15,8 @@
         "5",
         "7",
         "8574",
-        "b7bb"
+        "b7bb",
+        "9"
       ]
     },
     {
@@ -191,7 +192,7 @@
     },
     {
       "id": "b7bb",
-      "title": "Why Vue.js Became My Favorite JavaScript Framework",
+      "title": "How Vue.js Became My Favorite JavaScript Framework",
       "body": " Its clean syntax, ease of use, and clear documentation helped me build apps faster with fewer bugs. The reactive data system just works, and the single-file components make organization simple. For both beginners and pros, Vue offers a smooth and powerful development experience. It's now my go-to framework for side projects and freelance work.",
       "author": "Test User",
       "publishedAt": "2025-08-08T07:26:56.958Z",
@@ -324,12 +325,6 @@
       "postId": "2",
       "text": "Wow! Loved Every Bit",
       "author": "Ian Evans"
-    },
-    {
-      "id": "ebdb",
-      "postId": null,
-      "text": "This is a test comment",
-      "author": "Test User"
     }
   ]
 }

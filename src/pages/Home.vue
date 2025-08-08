@@ -47,7 +47,7 @@ console.log()
           v-for="post in latestPosts"
           :key="post.id"
           class="blog"
-          @click="onPostClick(post.id)"
+          @click="(e) => onPostClick(post.id, e)"
           v-else
         >
           <h6>{{ post.title }}</h6>
