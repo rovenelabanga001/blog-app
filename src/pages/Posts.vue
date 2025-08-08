@@ -88,7 +88,8 @@ const filteredPosts = computed(() => {
   flex-wrap: wrap;
   column-gap: 2rem;
   row-gap: 3rem;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   box-shadow: none;
 }
 </style>

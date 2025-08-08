@@ -5,7 +5,7 @@ const { showAuthor } = defineProps(['showAuthor'])
 <template>
   <input
     type="text"
-    :placeholder="showAuthor ? 'Search for post by name or author' : 'Search for post by name'"
+    :placeholder="showAuthor ? 'Search for blog by name or author' : 'Search for blog by name'"
     v-model="model"
   />
 </template>

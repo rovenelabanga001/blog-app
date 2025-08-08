@@ -6,7 +6,17 @@
       "password": 123456,
       "firstName": "Test",
       "lastName": "User",
-      "readPosts": [1, 2, 4, "3", "6", "5", "7"]
+      "readPosts": [
+        1,
+        2,
+        4,
+        "3",
+        "6",
+        "5",
+        "7",
+        "8574",
+        "b7bb"
+      ]
     },
     {
       "id": "2965",
@@ -14,7 +24,12 @@
       "lastName": "Doe",
       "email": "johndoe@example.com",
       "password": "123456",
-      "readPosts": [3, 5, 6, 8]
+      "readPosts": [
+        3,
+        5,
+        6,
+        8
+      ]
     },
     {
       "id": "813b",
@@ -22,7 +37,13 @@
       "lastName": "Otieno",
       "email": "otis@gmail.com",
       "password": "otis@123",
-      "readPosts": [2, 4, 6, 7, 9]
+      "readPosts": [
+        2,
+        4,
+        6,
+        7,
+        9
+      ]
     },
     {
       "id": "7137",
@@ -30,7 +51,13 @@
       "lastName": "123",
       "email": "123@gmail.edu124444",
       "password": "1234567",
-      "readPosts": [1, 3, 5, 7, 9]
+      "readPosts": [
+        1,
+        3,
+        5,
+        7,
+        9
+      ]
     },
     {
       "id": "c2cd",
@@ -46,7 +73,11 @@
       "lastName": "Koskei",
       "email": "darbiekossy@gmail.com",
       "password": "123456",
-      "readPosts": ["6", "5", null]
+      "readPosts": [
+        "6",
+        "5",
+        null
+      ]
     },
     {
       "id": "a19a",
@@ -54,7 +85,10 @@
       "lastName": "o2",
       "email": "dave@gmail.com",
       "password": "123456",
-      "readPosts": ["6", "5"]
+      "readPosts": [
+        "6",
+        "5"
+      ]
     },
     {
       "id": "da87",
@@ -62,7 +96,10 @@
       "lastName": "otieno",
       "email": "mikeoti@gmail.com",
       "password": "123456",
-      "readPosts": ["3", "2"]
+      "readPosts": [
+        "3",
+        "2"
+      ]
     },
     {
       "id": "65b5",
@@ -70,7 +107,13 @@
       "lastName": "Evans",
       "email": "ian@gmail.com",
       "password": "123Ian4",
-      "readPosts": ["3", "6", "2", "5", "7"]
+      "readPosts": [
+        "3",
+        "6",
+        "2",
+        "5",
+        "7"
+      ]
     }
   ],
   "posts": [
@@ -145,6 +188,14 @@
       "author": "Daniel Njoroge",
       "publishedAt": "2025-07-03T15:55:00Z",
       "userId": ""
+    },
+    {
+      "id": "b7bb",
+      "title": "Why Vue.js Became My Favorite JavaScript Framework",
+      "body": " Its clean syntax, ease of use, and clear documentation helped me build apps faster with fewer bugs. The reactive data system just works, and the single-file components make organization simple. For both beginners and pros, Vue offers a smooth and powerful development experience. It's now my go-to framework for side projects and freelance work.",
+      "author": "Test User",
+      "publishedAt": "2025-08-08T07:26:56.958Z",
+      "userId": "1"
     }
   ],
   "comments": [
@@ -273,6 +324,12 @@
       "postId": "2",
       "text": "Wow! Loved Every Bit",
       "author": "Ian Evans"
+    },
+    {
+      "id": "ebdb",
+      "postId": null,
+      "text": "This is a test comment",
+      "author": "Test User"
     }
   ]
 }

@@ -28,7 +28,8 @@ onMounted(async () => {
   }
 })
 
-const handlePostClick = async (postId) => {
+const handlePostClick = async (postId, e) => {
+  e.stopPropagation()
   const isAlreadyRead = authStore.readPosts.map(String).includes(String(postId))
 
   if (!isAlreadyRead) {

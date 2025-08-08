@@ -6,15 +6,18 @@ import SearchComponent from '@/components/SearchComponent.vue'
 import { baseUrl } from '@/config'
 import DefaultLayout from '@/Layouts/DefaultLayout.vue'
 import { useAuthStore } from '@/stores/auth'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, h } from 'vue'
 import { Plus } from 'lucide-vue-next'
+import { Trash, Pencil } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const userPosts = ref([])
 const error = ref(null)
 const searchQuery = ref('')
 
 const authStore = useAuthStore()
+const toast = useToast()
 const router = useRouter()
 const userId = authStore.user?.id
 
@@ -45,6 +48,68 @@ const filteredPosts = computed(() => {
 const onAddBlogClick = () => {
   router.push({ name: 'AddBlog' })
 }
+
+const deleteBlog = async (postId) => {
+  try {
+    const res = await fetch(`${baseUrl}/posts/${postId}`, {
+      method: 'DELETE',
+    })
+
+    if (!res.ok) throw new Error('Failed to delete post')
+
+    toast.success('Blog Deleted Successfully')
+  } catch (err) {
+    toast.error('Failed to delete post. Try again later')
+    console.error(err)
+  }
+}
+
+const confirmDelete = (id) => {
+  toast(
+    {
+      component: {
+        render() {
+          return h('div', {}, [
+            h(
+              'p',
+              {
+                style: 'color: white',
+              },
+              'Are you sure you want to delete this blog?',
+            ),
+            h(
+              'button',
+              {
+                style:
+                  'margin-right : 10px; background-color: red; color:white; border: none; cursor: pointer; width: 4rem',
+                onClick: () => {
+                  deleteBlog(id)
+                  toast.clear()
+                  router.back()
+                },
+              },
+              'Yes',
+            ),
+            h(
+              'button',
+              {
+                style:
+                  'background-color: orange; color:white;border: none; cursor: pointer; width: 4rem',
+                onClick: () => toast.clear(),
+              },
+              'No',
+            ),
+          ])
+        },
+      },
+    },
+    {
+      timeout: false,
+      closeOnClick: false,
+      hideProgressBar: true,
+    },
+  )
+}
 </script>
 
 <template>
@@ -56,12 +121,19 @@ const onAddBlogClick = () => {
         </button>
       </div>
       <SearchComponent v-model="searchQuery" :showAuthor="false" v-if="userPosts.length !== 0" />
-      <div class="my-blogs-container" v-if="filteredPosts.length && !error">
+      <div class="blog-cards-container" v-if="filteredPosts.length && !error">
         <BlogCard
           :filteredPosts="filteredPosts"
           :showReadStatus="false"
           v-if="filteredPosts && filteredPosts.length"
-        />
+        >
+          <template #actions="{ postId }">
+            <button class="my-btn" @click.stop="confirmDelete(postId)">
+              <Trash color="orange" :size="15" />
+            </button>
+            <button class="my-btn"><Pencil color="orange" :size="15" /></button>
+          </template>
+        </BlogCard>
       </div>
       <NoResults
         v-else-if="filteredPosts && !filteredPosts.length && searchQuery"
@@ -77,6 +149,10 @@ const onAddBlogClick = () => {
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
 }
 .add-blog-btn-container {
   align-self: flex-end;
@@ -90,12 +166,22 @@ button.add-blog-btn {
   background: none;
   border: none;
   color: orange;
+  cursor: pointer;
 }
-.my-blogs-container {
+.blog-cards-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   width: 100%;
+  margin-top: 4rem;
+}
+.my-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.my-btn svg {
+  font-size: 5px;
 }
 </style>

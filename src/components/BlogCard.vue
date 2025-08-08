@@ -11,15 +11,12 @@ const { filteredPosts, showReadStatus = true } = defineProps(['filteredPosts', '
 
 const formattedDate = (isoDateString) => {
   const date = new Date(isoDateString)
-  const yy = String(date.getFullYear()).slice(-2)
-  const mm = String(date.getMonth() + 1).padStart(2, '0')
-  const dd = String(date.getDate()).padStart(2, '0')
-
-  return `${yy}-${dd}-${mm}`
+  const options = { year: 'numeric', month: 'long', day: '2-digit' }
+  return date.toLocaleDateString('en-US', options)
 }
 </script>
 <template>
-  <div v-for="post in filteredPosts" class="blog-card" @click="onPostClick(post.id)">
+  <div v-for="post in filteredPosts" class="blog-card" @click="(e) => onPostClick(post.id, e)">
     <div class="card-header">
       <h4 style="font-size: small">{{ post.title }}</h4>
     </div>
@@ -28,7 +25,7 @@ const formattedDate = (isoDateString) => {
         {{ post.author }}
       </p>
       <p style="color: white; font-size: smaller; font-style: italic">
-        {{ formattedDate(post.publishedAt) }} {{ post.id }}
+        {{ formattedDate(post.publishedAt) }}
       </p>
       <p class="read" style="font-style: italic" v-if="showReadStatus">
         <span v-if="readPosts.map(String).includes(String(post.id))" style="color: yellow"
@@ -36,6 +33,9 @@ const formattedDate = (isoDateString) => {
         >
         <span v-else style="color: lightgray">Unread</span>
       </p>
+      <div>
+        <slot name="actions" :postId="post.id"></slot>
+      </div>
     </div>
   </div>
 </template>
