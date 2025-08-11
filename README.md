@@ -42,7 +42,7 @@ Install my-project with npm
 ### 4. Install project dependencies
 
 ```
-    npm Install
+    npm install
 ```
 
 ### 5. Run JSON-server
