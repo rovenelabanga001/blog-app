@@ -125,7 +125,8 @@
       "readPosts": [
         "b7bb",
         "3",
-        "6"
+        "6",
+        "48bb"
       ]
     }
   ],
@@ -209,14 +210,6 @@
       "author": "Test User",
       "publishedAt": "2025-08-08T07:26:56.958Z",
       "userId": "1"
-    },
-    {
-      "id": "48bb",
-      "title": "Lorem",
-      "body": "loremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem\n\n\n\nloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem\n\n\n",
-      "author": "Seven Eleven",
-      "publishedAt": "2025-08-11T06:00:49.301Z",
-      "userId": "5f41"
     }
   ],
   "comments": [
