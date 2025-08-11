@@ -58,6 +58,7 @@ const deleteBlog = async (postId) => {
     if (!res.ok) throw new Error('Failed to delete post')
 
     toast.success('Blog Deleted Successfully')
+    router.push({ name: 'MyBlogs' })
   } catch (err) {
     toast.error('Failed to delete post. Try again later')
     console.error(err)

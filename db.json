@@ -128,6 +128,18 @@
         "6",
         "48bb"
       ]
+    },
+    {
+      "id": "90d3",
+      "firstName": "Tobin",
+      "lastName": "Karioki",
+      "email": "karioki@gmail.com",
+      "password": "123456",
+      "readPosts": [
+        "6",
+        "b7bb",
+        "9"
+      ]
     }
   ],
   "posts": [
